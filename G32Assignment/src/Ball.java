@@ -5,6 +5,12 @@ public class Ball {
     private float catchChance;
     private float useChance;
 
+    public Ball(){
+        this.name = "Pokeball";
+        this.catchChance = 0.5f;
+        this.useChance = 0.5f;
+    }
+    
     public Ball(String name, float catchChance, float useChance) {
         this.name = name;
         this.catchChance = catchChance;
