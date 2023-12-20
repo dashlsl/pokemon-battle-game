@@ -3,8 +3,8 @@ package Pokemon;
 public class GrassPokemon extends Pokemon {
   
   //Constructors
-  public GrassPokemon(String name, String design, String type, int damage, int health, int grade){
-    super(name, design, type, damage, health, grade);
+  public GrassPokemon(String name, String status, String type, int grade, int health, int damage, String design) {
+    super(name, status, type, grade, health, damage, design);
   }
   
   //toString
