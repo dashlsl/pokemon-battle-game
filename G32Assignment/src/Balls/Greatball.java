@@ -1,5 +1,5 @@
 package Balls;
 
-public class Greatball {
+public class GreatBall {
     
 }

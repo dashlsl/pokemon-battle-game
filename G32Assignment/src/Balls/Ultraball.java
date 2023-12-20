@@ -1,4 +1,4 @@
 package Balls;
-public class Ultraball {
+public class UltraBall {
     
 }

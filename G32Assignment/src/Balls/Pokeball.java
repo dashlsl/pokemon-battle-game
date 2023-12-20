@@ -1,7 +1,7 @@
 package Balls;
-public class Pokeball extends Ball{
+public class PokeBall extends Ball{
 
-    public Pokeball(String name, float catchChance, float useChance) {
+    public PokeBall(String name, float catchChance, float useChance) {
         super(name, catchChance, useChance);
         //TODO Auto-generated constructor stub
     }
