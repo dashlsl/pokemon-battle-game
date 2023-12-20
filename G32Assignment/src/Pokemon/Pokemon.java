@@ -79,7 +79,7 @@ public class Pokemon {
     }
     
     //Method
-    // public void attack(getAttack()) {
-    //     huh
-    // }
+    public void attack(int health, int damage) {
+    	health =- getDamage();
+    }
 }

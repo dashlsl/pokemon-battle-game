@@ -16,5 +16,8 @@ public class FirePokemon extends Pokemon {
 
   
   //Method
+  public void attack(int health, int damage) {
+	  health =- getDamage();
+  }
 
 }
