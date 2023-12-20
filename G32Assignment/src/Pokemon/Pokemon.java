@@ -74,15 +74,12 @@ public class Pokemon {
     //toString
     @Override
     public String toString() {
-        return "Pokemon [name= " + name
-                        + "\n" + design
-                        + "\ntype= " + type + "damage= " + damage + "health= " + health + "grade= " + grade
-                        + "]";
+        return String.format("name= %s \n %s \n type= %s, damage= %d, health= %d, grade %d",
+            getName(), getDesign(), getType(), getDamage(), getHealth(), getGrade());
     }
-
     
     //Method
-    public void attack(getAttack()) {
-        huh
-    }
+    // public void attack(getAttack()) {
+    //     huh
+    // }
 }
