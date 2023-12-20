@@ -50,11 +50,22 @@ public class Ball {
     public void pokeCalChance(int grade, float catchChance){  
         if(grade == 1){
             catchChance = catchChance * 0.8f;
-        }else if ((grade == 2) || (grade == 3)){
-            catchChance = catchChance * 0.4f;
         }else {
-            catchChance = catchChance * 0.2f;
+           System.out.println("Pokemon was freed");
         }
+
+        if ((grade == 2) || (grade == 3)){
+            catchChance = catchChance * 0.5f;
+        } else {
+            System.out.println("Pokemon was freed");
+        }
+
+        if(grade >= 4){
+            catchChance = catchChance * 0.1f;
+        }else {
+            System.out.println("Pokemon was freed");
+        }
+
     }
     
     public void greatCalChance(float catchChance){  
