@@ -47,13 +47,13 @@ public class Ball {
         return "Ball [name=" + name + ", catchChance=" + catchChance + ", useChance=" + useChance + "]";
     }
 
-    public void pokeCalChance(float catchChance){  
+    public void pokeCalChance(int grade, float catchChance){  
         if(grade == 1){
-            catchChance = catchChance * 0.8;
-        }elif ((grade == 2) || (grade == 3)){
-            catchChance = catchChance * 0.4;
-        }else{
-            catchChance = catchChance * 0.2;
+            catchChance = catchChance * 0.8f;
+        }else if ((grade == 2) || (grade == 3)){
+            catchChance = catchChance * 0.4f;
+        }else {
+            catchChance = catchChance * 0.2f;
         }
     }
     
