@@ -31,7 +31,7 @@ public class Ball {
     }
 
     public void setCatchChance(float catchChance) {
-        this.catchChance = catchChance;
+        this.catchChance = 1.0f;
     }
 
     public float getUseChance() {
@@ -47,7 +47,29 @@ public class Ball {
         return "Ball [name=" + name + ", catchChance=" + catchChance + ", useChance=" + useChance + "]";
     }
 
+
     public void pokeCalChance(int grade, float catchChance){  
+        if(grade == 1){
+            catchChance = catchChance * 0.7f;
+        }else {
+           System.out.println("Pokemon was freed");
+        }
+
+        if ((grade == 2) || (grade == 3)){
+            catchChance = catchChance * 0.2f;
+        } else {
+            System.out.println("Pokemon was freed");
+        }
+
+        // if(grade >= 4){
+        //     catchChance = catchChance * 0.1f;
+        // }else {
+        //     System.out.println("Pokemon was freed");
+        // }
+
+    }
+    
+    public void greatCalChance(int grade, float catchChance){  
         if(grade == 1){
             catchChance = catchChance * 0.8f;
         }else {
@@ -55,28 +77,33 @@ public class Ball {
         }
 
         if ((grade == 2) || (grade == 3)){
-            catchChance = catchChance * 0.5f;
+            catchChance = catchChance * 0.4f;
         } else {
             System.out.println("Pokemon was freed");
         }
 
-        if(grade >= 4){
-            catchChance = catchChance * 0.1f;
+    }
+
+    public void ultraCalChance(int grade, float catchChance){  
+        if(grade == 1){
+            catchChance = catchChance * 0.9f;
         }else {
+           System.out.println("Pokemon was freed");
+        }
+
+        if ((grade == 2) || (grade == 3)){
+            catchChance = catchChance * 0.6f;
+        } else {
             System.out.println("Pokemon was freed");
         }
 
     }
-    
-    public void greatCalChance(float catchChance){  
-        
-    }
 
-    public void ultraCalChance(float catchChance){  
-        
-    }
-
-    public void masterCalChance(float catchChance){  
-        
+    public void masterCalChance(int grade, float catchChance){  
+        if(grade >= 1){
+            catchChance = catchChance * 1.0f;
+        }else {
+            System.out.println("Pokemon was freed");
+        }
     }
 }
