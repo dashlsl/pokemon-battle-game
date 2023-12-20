@@ -17,6 +17,14 @@ public class FirePokemon extends Pokemon {
   
   //Method
   public void attack(int health, int damage) {
+	  while (health > 0) {
+  		if (getType() == "Water") {
+  			health =- (int) (1.5 * getDamage());
+  		}
+  		else if (getType() == "Grass") {
+  			health =- (int) (2 * getDamage());
+  		}
+  	}
 	  health =- getDamage();
   }
 
