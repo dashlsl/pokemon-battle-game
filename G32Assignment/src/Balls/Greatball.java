@@ -1,7 +1,7 @@
 package Balls;
-public class Greatball extends Ball {
+public class GreatBall extends Ball {
 
-    public Greatball(String name, float greatCalChance, float useChance) {
+    public GreatBall(String name, float greatCalChance, float useChance) {
         super(name, greatCalChance, useChance);
 
     }

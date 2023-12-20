@@ -1,7 +1,7 @@
 package Balls;
-public class Masterball extends Ball {
+public class MasterBall extends Ball {
     
-    public Masterball(String name, float masterCalChance, float useChance) {
+    public MasterBall(String name, float masterCalChance, float useChance) {
         super(name, masterCalChance, useChance);
     
     }
