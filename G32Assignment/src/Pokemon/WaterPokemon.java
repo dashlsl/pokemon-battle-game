@@ -15,24 +15,33 @@ public class WaterPokemon extends Pokemon {
   }
 
   //Method
-  public void increaseDamageToWeakTypes(Pokemon opponent) {
-    if ("Caught".equals(this.getStatus()) && "Wild".equals(opponent.getStatus())) {
-      // Check if the opponent is Weak to Water
-      if ("Fire".equals(opponent.getType())) {
-          // Increase damage by 50%
-          int increasedDamage = (int) (this.getDamage() * 1.5);
-          super.setDamage(increasedDamage);
-
-          System.out.println("Increased damage by 50% against " + opponent.getName() + " (Weak to Water)!");
-      } else {
-          System.out.println("No damage increase. Opponent is not Weak to Water.");
-      }
+  public void attackEffect(Pokemon opponent) {
+    if ("Caught".equals(this.getStatus()) && "Wild".equals(opponent.getStatus())) {    	
+    	switch (opponent.getType()) {
+    	case "Water": // Normal damage
+            System.out.println("No damage increase. Opponent is not Weak to Water.");
+    		break;
+    	case "Fire": // Increase damage by 50%
+            int increasedDamage = (int) (this.getDamage() * 1.5);
+            super.setDamage(increasedDamage);
+            System.out.println("Increased damage by 50% against " + opponent.getName() + " (Weak to Water!");
+    		break;
+    	case "Grass": // Decrease damage by 50% 
+    		int decreasedDamage = (int) (this.getDamage() * 0.5);
+      	  	super.setDamage(decreasedDamage);
+            System.out.println("Decreased damage by 50% against " + opponent.getName() + " (Resistant to Water)!");
+    		break;
+    	default:
+            
+    		break;
+    		
+    	}
     }
   }
 
   @Override
   public void attack(Pokemon opponent) {
-    increaseDamageToWeakTypes(opponent);
+    attackEffect(opponent);
     super.attack(opponent);
   }
 }

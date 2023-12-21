@@ -73,7 +73,12 @@ public class Pokemon {
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        if (this.health < 0) {
+        	this.health = 0;
+        }
+        else {
+        	this.health = health;        	
+        }
     }
     public int getHealth() {
         return health;
@@ -102,33 +107,28 @@ public class Pokemon {
     
     //Method
     private void takeDamage(int damage) {
-        this.health -= damage;
+        this.setHealth(this.health -= damage);
     }
 
     public void attack(Pokemon opponent) {
-        // Check if status of own pokemon is "Caught" and opponent is "Wild"
+        // Check if status of own Pokemon is "Caught" and opponent is "Wild"
         if ("Caught".equals(this.getStatus()) && "Wild".equals(opponent.getStatus())) {
             // Check if own Pokemon is still alive
-            if (this.getHealth() > 0) {
-                // Deal damage to the opponent based on own damage attribute
-                int damageToOpponent = this.getDamage();
-                opponent.takeDamage(damageToOpponent);
+            while  ((this.getHealth() > 0) && (opponent.getHealth() > 0)) {
+                opponent.takeDamage(this.getDamage());
                 System.out.printf("Dealt %d damage to %s\n", this.getDamage(), opponent.getName());
-            } else {
-                System.out.println("Pokemon has fainted! Send another pokemon");
-            }
-
-            // Check if opponent Pokemon is still alive
-            if (opponent.getHealth() > 0) {
-                // Opponent pokemon counter-attacks based on their damage attribute
-                int damageToPlayer = opponent.getDamage();
-                this.takeDamage(damageToPlayer);
+                this.takeDamage(opponent.getDamage());                
                 System.out.printf("Opponent deals %d damage to %s\n", opponent.getDamage(), this.getName());
-            } else {
+            }
+            
+            if (this.getHealth() <= 0) {
+                System.out.println("Pokemon has fainted! Send another pokemon");
+            } 
+            else if (opponent.getHealth() <= 0) {
                 System.out.println("Opponent has fainted! They are unable to counter-attack.");
             }
-
-        } else {
+        } 
+        else {
             System.out.println("Error! Unable to attack.");
         }
     }
