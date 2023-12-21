@@ -32,8 +32,8 @@ public class Score implements Comparable<Score> {
     }
     
     //method
-    public void calculateScore(int damage, int catchBonus){
-        score=damage*123+catchBonus*1000;
+    public void calculateScore(int roundsWon, int catchBonus){
+        score=roundsWon*4000+catchBonus*1000;
     }
 
     //comparble interface implementaion, for arrays.sort
