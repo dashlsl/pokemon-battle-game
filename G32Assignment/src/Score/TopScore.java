@@ -1,5 +1,8 @@
 package Score;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 public class TopScore {
     //private Score[] topScore;
@@ -75,6 +78,18 @@ public class TopScore {
                 addScore(scoreInstance);
             }
     }
+
+    //Write to the File
+    public void Store(){
+        String filePath = "path/to/output.csv";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Score score : topScore) {
+                writer.write(score.getName() + "," + score.getScore() + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+    }
+}
 
     //toString
     public String toString(){
