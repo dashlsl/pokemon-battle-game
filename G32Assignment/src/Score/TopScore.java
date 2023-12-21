@@ -1,6 +1,7 @@
 package Score;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -58,14 +59,13 @@ public class TopScore {
     }
 
     //Read File Method
-    public void readFile(){
-        //Score
-        //File for score
-        String filePath="score.csv";
+    public void readFile() {
+        // Score File
+        String filePath = "score.csv";
 
-        BufferedReader br = new BufferedReader(new FileReader(filePath)) {
-
-        // Read each line of the file
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            // Read each line of the file
+            String line;
             while ((line = br.readLine()) != null) {
                 // Split the line into name and score based on the comma
                 String[] parts = line.split(",");
@@ -74,10 +74,15 @@ public class TopScore {
                 String name = parts[0].trim();
                 int score = Integer.parseInt(parts[1].trim());
 
-                Score scoreInstance=new Score(name,score);
+                Score scoreInstance = new Score(name, score);
                 addScore(scoreInstance);
             }
+        } catch (IOException e) {
+            // Handle IOException, e.g., print an error message or log the exception
+            e.printStackTrace();
+        }
     }
+
 
     //Write to the File
     public void Store(){
