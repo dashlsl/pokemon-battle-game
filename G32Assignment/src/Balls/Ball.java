@@ -1,6 +1,4 @@
 package Balls;
-
-import java.util.Random;
 public class Ball {
 
     private String name;
@@ -15,6 +13,8 @@ public class Ball {
         this.catchChance = 0.5f;
         this.useChance = 0.5f;
         this.calculation = true;
+        this.smallMultiplier = 0.0f;
+        this.bigMultiplier = 0.0f;
     }
 
     public Ball(String name, float catchChance, float useChance, boolean calculation, float smallMultiplier, float bigMultiplier) {
@@ -47,7 +47,7 @@ public class Ball {
     }
 
     public void setUseChance(float useChance) {
-        double randomValue = Math.random();
+        this.useChance = 0.0f;
     }
 
     public float getSmallCalculation(){
@@ -72,21 +72,16 @@ public class Ball {
     }
 
     public boolean calculation(int grade, float useChance, float catchChance, float smallMultiplier, float bigMultiplier){
-        if (useChance > 0.3) {
-            if (grade == 1) {
-                catchChance = catchChance * smallMultiplier;
-                return true;
-            }
-            if (grade == 2 || grade == 3) {
-                catchChance = getCatchChance() * bigMultiplier;
-                return true;
-            } 
-            else {
-                System.out.println("Pokemon was freed");
-                return false;
-            }
-        } else {
-            System.out.println("Use chance is too low. Ball may fail to work.");
+        if (grade == 1) {
+            catchChance = catchChance * smallMultiplier;
+            return true;
+        }
+        if (grade == 2 || grade == 3) {
+            catchChance = getCatchChance() * bigMultiplier;
+            return true;
+        } 
+        else {
+            System.out.println("Pokemon was freed");
             return false;
         }
     }
