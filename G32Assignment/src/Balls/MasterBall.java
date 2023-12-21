@@ -3,7 +3,7 @@ package Balls;
 public class MasterBall extends Ball {
     private float masterCalChance;
 
-    public MasterBall(String name, float masterCalChance, float useChance) {
+    public MasterBall(String name, float masterCalChance, float useChance, float catchChance) {
         super(name, masterCalChance, useChance);
         this.masterCalChance = masterCalChance;
     }

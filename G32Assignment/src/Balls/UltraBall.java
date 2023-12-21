@@ -3,12 +3,12 @@ package Balls;
 public class UltraBall extends Ball {
     private float ultraCalChance;
 
-    public UltraBall(String name, float ultraCalChance, float useChance) {
+    public UltraBall(String name, float ultraCalChance, float useChance, float catchChance) {
         super(name, ultraCalChance, useChance);
         this.ultraCalChance = ultraCalChance;
     }
 
-    public void calculateCatchChance(int grade, float useChance, float catchChance) {
+    public void ultraCatchChance(int grade, float useChance, float catchChance) {
         if (useChance > 0.7) {
             if (grade == 1) {
                 catchChance = catchChance * 0.9f;

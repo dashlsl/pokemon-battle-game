@@ -3,12 +3,12 @@ package Balls;
 public class GreatBall extends Ball {
     private float greatCalChance;
 
-    public GreatBall(String name, float greatCalChance, float useChance) {
+    public GreatBall(String name, float greatCalChance, float useChance, float catchChance) {
         super(name, greatCalChance, useChance);
         this.greatCalChance = greatCalChance;
     }
 
-    public void calculateCatchChance(int grade, float useChance, float catchChance) {
+    public void greatCalChance(int grade, float useChance, float catchChance) {
         if (useChance > 0.5) {
             if (grade == 1) {
                 catchChance = catchChance * 0.8f;
