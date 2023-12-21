@@ -44,6 +44,13 @@ public class Game {
         System.out.println(topScore);
     }
     private static void viewSavedPokemon() {
-        System.out.println(savedPokemon);
+        if (savedPokemon.isEmpty()) {
+            System.out.println("No Pokemon in your saved list.");
+        } else {
+            System.out.println("Your saved Pokemon:");
+            for (int i = 0; i < savedPokemon.size(); i++) {
+                System.out.println((i + 1) + ". " + savedPokemon.get(i));
+            }
+        }
     }
 }
