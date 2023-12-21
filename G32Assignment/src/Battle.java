@@ -7,145 +7,142 @@ public class Battle {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void startBattle(ArrayList<Pokemon> pokemonList, ArrayList<Pokemon> savedPokemon, TopScore topScore) {
+        // User chooses first pokemon
         Pokemon poke1 = chooseUserPokemon(savedPokemon);
         poke1.setStatus("Caught");
         savedPokemon.add(poke1);
 
-        Pokemon enemy1 = new Pokemon("Charmander", "Wild", "Fire", 1, 100, 20, "Enemy1Design");
-        Pokemon enemy2 = new Pokemon("Blastoise", "Wild", "Water", 1, 100, 20, "Enemy2Design");
+        // Create 3 random enemies
+        Pokemon poke2 = getRandomPoke(pokemonList);
+        Pokemon poke3 = getRandomPoke(pokemonList);
+        Pokemon poke4 = getRandomPoke(pokemonList);
 
-        int userOriginalHealth = poke1.getHealth();
-        int enemy1OriginalHealth = enemy1.getHealth();
-        int enemy2OriginalHealth = enemy2.getHealth();
+        // Initialize original health
+        int poke1OriginalHealth = poke1.getHealth();
+        int poke2OriginalHealth = poke2.getHealth();
+        int poke3OriginalHealth = poke3.getHealth();
+        int poke4OriginalHealth = poke4.getHealth();
 
-        //First battle
-        System.out.println("First Battle:");
+        boolean battleLost = false;
 
-        simulateBattle(poke1, enemy1);
-        // simulateBattle(poke1, enemy2);
-
-        if (catchPokemonPrompt()) {
-            Ball ball = getRandomBall();
-            catchPokemon(enemy1, ball, savedPokemon);
-        }
-
-        int continueOption = battleMenu();
-
-        while (continueOption == 1) {
-            
-            Pokemon enemy3 = getRandomEnemy(pokemonList);
-            Pokemon enemy4 = getRandomEnemy(pokemonList);
-            
-            int enemy3OriginalHealth = enemy3.getHealth();
-            int enemy4OriginalHealth = enemy4.getHealth();
-
-            resetPokemonHealth(poke1, userOriginalHealth);
-            resetPokemonHealth(enemy1, enemy1OriginalHealth);
-            resetPokemonHealth(enemy2, enemy2OriginalHealth);
-            resetPokemonHealth(enemy3, enemy3OriginalHealth);
-            resetPokemonHealth(enemy4, enemy4OriginalHealth);
-
-            ArrayList<Pokemon> userTeam = selectTeam(savedPokemon);
-
-            simulateBattle(userTeam, enemy3);
-            simulateBattle(userTeam, enemy4);
-
+        // First battle
+        System.out.println("\nFirst Battle:");
+        poke1.attack(poke2);
+        if (poke2.getHealth() <= 0) {
+            System.out.println("\nYour " + poke1.getName() + " defeated Enemy " + poke2.getName() + "!");
             if (catchPokemonPrompt()) {
                 Ball ball = getRandomBall();
-                catchPokemon(enemy3, ball, savedPokemon);
-                catchPokemon(enemy4, ball, savedPokemon);
+                catchPokemon(poke2, ball, savedPokemon);
             }
-
-            continueOption = battleMenu();
+        } else if (poke1.getHealth() <= 0) {
+            System.out.println("\nBattle lost! Your " + poke1.getName() + " couldn't defeat Enemy " + poke2.getName() + ".");
+            battleLost = true;         
         }
-    }
 
-    // Battle Menu
-    private static int battleMenu() {
-        System.out.println("1. Continue Battle");
-        System.out.println("2. Back to Main Menu");
-        System.out.print("Select an option: ");
-        return scanner.nextInt();
+        if (!battleLost) {
+            System.out.println("\nSecond Battle:");
+    
+            // Reset Pokemon original health
+            resetPokemonHealth(poke1, poke1OriginalHealth);
+            resetPokemonHealth(poke2, poke2OriginalHealth);
+            resetPokemonHealth(poke3, poke3OriginalHealth);
+            resetPokemonHealth(poke4, poke4OriginalHealth);
+    
+            ArrayList<Pokemon> userTeam = selectTeam(savedPokemon);
+            
+            int opponentIndex = 0;
+            
+            System.out.println("");
+            for (Pokemon user : userTeam) {
+                Pokemon currentOpponent = (opponentIndex == 0) ? poke3 : poke4;
+    
+                user.attack(currentOpponent);
+    
+                if (currentOpponent.getHealth() <= 0) {
+                    System.out.println("\nYour " + user.getName() + " defeated Enemy " + currentOpponent.getName() + "!");
+                    if (catchPokemonPrompt()) {
+                        Ball ball = getRandomBall();
+                        catchPokemon(currentOpponent, ball, savedPokemon);
+                    }
+                    opponentIndex++;
+                } else {
+                    System.out.println("\nYour " + user.getName() + " couldn't defeat Enemy " + currentOpponent.getName() + ".");
+                    battleLost = true;
+                    break;
+                }
+            }
+    
+            if (!battleLost && opponentIndex >= 2) {
+                System.out.println("\nCongratulations! You defeated all opponents!");
+            }
+        }
+
+        if (battleLost) {
+            System.out.println("\nReturning to the main menu...");
+            savedPokemon.remove(poke1);
+        }
     }
 
     private static void resetPokemonHealth(Pokemon pokemon, int originalHealth) {
         pokemon.setHealth(originalHealth);
     }
 
-    // First battle
-    private static void simulateBattle(Pokemon attacker, Pokemon defender) {
-        attacker.attack(defender);
-        defender.attack(attacker);
-    }
-    // Multiple own pokemon
-    private static void simulateBattle(ArrayList<Pokemon> attackers, Pokemon defender) {
-        for (Pokemon attacker : attackers) {
-            simulateBattle(attacker, defender);
-        }
-    }
-
     // First pokemon
     private static Pokemon chooseUserPokemon(ArrayList<Pokemon> savedPokemon) {
-        // Display the available Pokemon for the user to choose from
-        System.out.println("Choose your first Pokemon!");
-        System.out.println("1. Squirtle");
-        System.out.println("2. Charmander");
-        System.out.println("3. Bulbasaur");
+        System.out.println("\nChoose your first Pokemon!"
+                            + "\n[1] Squirtle"
+                            + "\n[2] Charmander"
+                            + "\n[3] Bulbasaur");
 
-        int selectedIndex;
+        int firstChoice;
         do {
             System.out.print("Enter the number of your chosen Pokemon: ");
-            selectedIndex = scanner.nextInt();
-        } while (selectedIndex < 1 || selectedIndex > 3);
+            firstChoice = scanner.nextInt();
+        } while (firstChoice < 1 || firstChoice > 3);
 
         // Return the user's chosen Pokemon
-        switch (selectedIndex) {
+        switch (firstChoice) {
             case 1:
-                return new WaterPokemon("Squirtle", "Caught", "Water", 1, 100, 20, "SquirtleDesign");
+                return new WaterPokemon("Squirtle", "Caught", "Water", 1, 100, 20);
             case 2:
-                return new FirePokemon("Charmander", "Caught", "Fire", 1, 100, 20, "CharmanderDesign");
+                return new FirePokemon("Charmander", "Caught", "Fire", 1, 100, 20);
             case 3:
-                return new GrassPokemon("Bulbasaur", "Caught", "Grass", 1, 100, 20, "BulbasaurDesign");
+                return new GrassPokemon("Bulbasaur", "Caught", "Grass", 1, 100, 20);
             default:
                 throw new IllegalArgumentException("Invalid selection");
         }
     }
 
-    // Multiple pokemon
+    // User's Pokemon team
     private static ArrayList<Pokemon> selectTeam(ArrayList<Pokemon> savedPokemon) {
-        System.out.println("Select 2 Pokemon for your team:");
+        System.out.println("\nSelect 2 Pokemon for your team.");
     
         ArrayList<Pokemon> userTeam = new ArrayList<>();
+    
         for (int i = 0; i < 2; i++) {
             Pokemon selectedPokemon;
             do {
-                selectedPokemon = choosePokemonFromSaved(savedPokemon);
+                System.out.println("\nChoose a Pokemon from your saved list:");
+                for (int j = 0; j < savedPokemon.size(); j++) {
+                    System.out.println((j + 1) + ". " + savedPokemon.get(j));
+                }
+                int choice;
+                do {
+                    System.out.print("Enter the number of the Pokemon: ");
+                    choice = scanner.nextInt();
+                } while (choice < 1 || choice > savedPokemon.size());
+                selectedPokemon = savedPokemon.get(choice - 1);
             } while (userTeam.contains(selectedPokemon));  // Check if the selected Pokemon is already in the team
+
             userTeam.add(selectedPokemon);
             savedPokemon.remove(selectedPokemon);
         }
-    
         return userTeam;
     }
 
-    private static Pokemon choosePokemonFromSaved(ArrayList<Pokemon> savedPokemon) {
-        System.out.println("Choose a Pokemon from your saved list:");
-        for (int i = 0; i < savedPokemon.size(); i++) {
-            System.out.println((i + 1) + ". " + savedPokemon.get(i));
-        }
-
-        int selectedIndex;
-        do {
-            System.out.print("Enter the number of the Pokemon: ");
-            selectedIndex = scanner.nextInt();
-        } while (selectedIndex < 1 || selectedIndex > savedPokemon.size());
-
-        return savedPokemon.get(selectedIndex - 1);
-    }
-
-    private static Pokemon getRandomEnemy(ArrayList<Pokemon> pokemonList) {
-        // Create 6 Pokemon objects and add them to the pokemonList
-        createAndAddPokemons(pokemonList);
+    private static Pokemon getRandomPoke(ArrayList<Pokemon> pokemonList) {
+        // Create Pokemon objects and add them to the pokemonList
+        createPokemon(pokemonList);
     
         // Check if the list is not empty
         if (pokemonList.isEmpty()) {
@@ -157,14 +154,14 @@ public class Battle {
         return pokemonList.get(random.nextInt(pokemonList.size()));
     }
     
-    private static void createAndAddPokemons(ArrayList<Pokemon> pokemonList) {
+    private static void createPokemon(ArrayList<Pokemon> pokemonList) {
         // You can customize the attributes of these Pokemon objects
-        Pokemon pokemon1 = new Pokemon("Charmander", "Wild", "Fire", 1, 100, 20, "Design1");
-        Pokemon pokemon2 = new Pokemon("Bulbasaur", "Wild", "Grass", 1, 100, 20, "Design2");
-        Pokemon pokemon3 = new Pokemon("Squirtle", "Wild", "Water", 1, 100, 20, "Design3");
-        Pokemon pokemon4 = new Pokemon("Vulpix", "Wild", "Fire", 1, 100, 20, "Design4");
-        Pokemon pokemon5 = new Pokemon("Oddish", "Wild", "Grass", 1, 100, 20, "Design5");
-        Pokemon pokemon6 = new Pokemon("Psyduck", "Wild", "Water", 1, 100, 20, "Design6");
+        FirePokemon pokemon1 = new FirePokemon("Charmander", "Wild", "Fire", 1, 100, 20);
+        GrassPokemon pokemon2 = new GrassPokemon("Bulbasaur", "Wild", "Grass", 1, 100, 20);
+        WaterPokemon pokemon3 = new WaterPokemon("Squirtle", "Wild", "Water", 1, 100, 20);
+        FirePokemon pokemon4 = new FirePokemon("Vulpix", "Wild", "Fire", 1, 100, 20);
+        GrassPokemon pokemon5 = new GrassPokemon("Oddish", "Wild", "Grass", 1, 100, 20);
+        WaterPokemon pokemon6 = new WaterPokemon("Psyduck", "Wild", "Water", 1, 100, 20);
     
         // Add the Pokemon objects to the pokemonList
         pokemonList.add(pokemon1);
@@ -176,7 +173,7 @@ public class Battle {
     }
 
     private static boolean catchPokemonPrompt() {
-        System.out.println("Do you want to try catching the enemy Pokemon? (1. Yes, 2. No)");
+        System.out.print("\nDo you want to try catching the enemy Pokemon? (1. Yes, 2. No): ");
         int choice = scanner.nextInt();
     
         if (choice == 1) {
@@ -197,7 +194,8 @@ public class Battle {
 
         if (isCaught) {
             pokemonList.add(enemyPokemon);  // Add the caught Pokemon to the list
-            System.out.println("Congratulations! You caught the enemy Pokemon with a " + ball);
+            System.out.println("Congratulations! You caught the enemy Pokemon with a(n) " + ball.getName());
+            enemyPokemon.setStatus("Caught");
         } else {
             System.out.println("Oh no! The enemy Pokemon broke free. Better luck next time!");
         }

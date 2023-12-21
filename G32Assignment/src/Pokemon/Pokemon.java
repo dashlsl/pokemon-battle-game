@@ -8,7 +8,6 @@ public class Pokemon {
     private int grade;
     private int health;
     private int damage;
-    private String design;
 
     //Constructors
     public Pokemon(){
@@ -18,17 +17,15 @@ public class Pokemon {
         this.grade = 1; //Range of 1-3. 1 is highest, 3 is lowest
         this.health = 100;
         this.damage = 0;
-        this.design = "";
     }
     
-    public Pokemon(String name, String status, String type, int grade, int health, int damage, String design) {
+    public Pokemon(String name, String status, String type, int grade, int health, int damage) {
         this.name = name;
         this.status = status;
         this.type = type;
         this.grade = grade;
         this.health = health;
         this.damage = damage;
-        this.design = design;
     }
     
     //Setter Getter
@@ -91,18 +88,11 @@ public class Pokemon {
         return damage;
     }
 
-    public void setDesign(String design) {
-        this.design = design;
-    }
-    public String getDesign() {
-        return design;
-    }
-
     //toString
     @Override
     public String toString() {
-        return String.format("name= %s \n %s \n type= %s, damage= %d, health= %d, grade %d",
-            getName(), getDesign(), getType(), getDamage(), getHealth(), getGrade());
+        return String.format("name= %s, type= %s, damage= %d, health= %d, grade %d",
+            getName(), getType(), getDamage(), getHealth(), getGrade());
     }
     
     //Method
@@ -114,7 +104,7 @@ public class Pokemon {
         // Check if status of own Pokemon is "Caught" and opponent is "Wild"
         if ("Caught".equals(this.getStatus()) && "Wild".equals(opponent.getStatus())) {
             // Check if own Pokemon is still alive
-            while  ((this.getHealth() > 0) && (opponent.getHealth() > 0)) {
+            while ((this.getHealth() > 0) && (opponent.getHealth() > 0)) {
                 opponent.takeDamage(this.getDamage());
                 System.out.printf("Dealt %d damage to %s\n", this.getDamage(), opponent.getName());
                 this.takeDamage(opponent.getDamage());                
