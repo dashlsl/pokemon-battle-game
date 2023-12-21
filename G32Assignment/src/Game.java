@@ -22,7 +22,6 @@ public class Game {
     private static ArrayList<Pokemon> savedPokemon = new ArrayList<>();
     private static TopScore topScore = new TopScore();
 
-
     public static void main(String[] args) {
         int option;
 
