@@ -1,9 +1,10 @@
 package Score;
+import java.io.BufferedReader;
 import java.util.*;
 public class TopScore {
     //private Score[] topScore;
     private ArrayList<Score> topScore=new ArrayList<>();
-
+        
     //Constructor
     public TopScore(){
     }
@@ -51,6 +52,28 @@ public class TopScore {
             int index=topScore.size()-1;
             topScore.remove(index);
         }
+    }
+
+    //Read File Method
+    public void readFile(){
+        //Score
+        //File for score
+        String filePath="score.csv";
+
+        BufferedReader br = new BufferedReader(new FileReader(filePath)) {
+
+        // Read each line of the file
+            while ((line = br.readLine()) != null) {
+                // Split the line into name and score based on the comma
+                String[] parts = line.split(",");
+
+                // Assuming parts[0] is the name and parts[1] is the score
+                String name = parts[0].trim();
+                int score = Integer.parseInt(parts[1].trim());
+
+                Score scoreInstance=new Score(name,score);
+                addScore(scoreInstance);
+            }
     }
 
     //toString
