@@ -122,7 +122,7 @@ public class Pokemon {
             }
             
             if (this.getHealth() <= 0) {
-                System.out.println("Pokemon has fainted! Send another pokemon");
+                System.out.println("Pokemon has fainted! Send another Pokemon");
             } 
             else if (opponent.getHealth() <= 0) {
                 System.out.println("Opponent has fainted! They are unable to counter-attack.");

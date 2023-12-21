@@ -19,22 +19,20 @@ public class WaterPokemon extends Pokemon {
     if ("Caught".equals(this.getStatus()) && "Wild".equals(opponent.getStatus())) {    	
     	switch (opponent.getType()) {
     	case "Water": // Normal damage
-            System.out.println("No damage increase. Opponent is not Weak to Water.");
+            System.out.println("Same type, no damage increase.");
     		break;
     	case "Fire": // Increase damage by 50%
             int increasedDamage = (int) (this.getDamage() * 1.5);
             super.setDamage(increasedDamage);
-            System.out.println("Increased damage by 50% against " + opponent.getName() + " (Weak to Water!");
+            System.out.println("Increased damage by 50% against opponent " + opponent.getName() + " (Weak to Water)!");
     		break;
     	case "Grass": // Decrease damage by 50% 
     		int decreasedDamage = (int) (this.getDamage() * 0.5);
       	  	super.setDamage(decreasedDamage);
-            System.out.println("Decreased damage by 50% against " + opponent.getName() + " (Resistant to Water)!");
+            System.out.println("Decreased damage by 50% against opponent " + opponent.getName() + " (Resistant to Water)!");
     		break;
     	default:
-            
     		break;
-    		
     	}
     }
   }
