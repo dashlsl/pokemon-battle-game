@@ -193,7 +193,7 @@ public class Battle {
         ball = getRandomBall();
 
         // Use the catch logic based on the random ball
-        boolean isCaught = ball.pokeCalChance(enemyPokemon.getGrade(), ball.getCatchChance());
+        boolean isCaught = ball.calculation(enemyPokemon.getGrade(), ball.getCatchChance(), ball.getUseChance(), ball.getSmallCalculation(), ball.getBigCalculation());
 
         if (isCaught) {
             pokemonList.add(enemyPokemon);  // Add the caught Pokemon to the list
@@ -205,10 +205,10 @@ public class Battle {
 
     private static Ball getRandomBall() {
         ArrayList<Ball> availableBalls = new ArrayList<>();
-        availableBalls.add(new PokeBall("Pokeball", 0.5f, 0.5f));
-        availableBalls.add(new GreatBall("Great Ball", 0.8f, 0.5f));
-        availableBalls.add(new UltraBall("Ultra Ball", 0.9f, 0.7f));
-        availableBalls.add(new MasterBall("Master Ball", 1.0f, 0.9f));
+        availableBalls.add(new PokeBall("Pokeball", 0.5f, 0.5f, false, 0.7f, 0.5f));
+        availableBalls.add(new GreatBall("Great Ball", 0.5f, 0.8f, false, 0.8f, 0.6f));
+        availableBalls.add(new UltraBall("Ultra Ball", 0.9f, 0.7f, false, 0.9f, 0.7f));
+        availableBalls.add(new MasterBall("Master Ball", 1.0f, 0.9f, false, 1f, 1f));
 
         Random random = new Random();
         return availableBalls.get(random.nextInt(availableBalls.size()));
