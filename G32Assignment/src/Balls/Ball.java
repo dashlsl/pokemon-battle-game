@@ -15,7 +15,7 @@ public class Ball {
         this.bigMultiplier = 0.0f;
     }
 
-    public Ball(String name, float catchChance, float useChance, boolean calculation, float smallMultiplier, float bigMultiplier) {
+    public Ball(String name, float catchChance, float useChance, float smallMultiplier, float bigMultiplier) {
         this.name = name;
         this.catchChance = catchChance;
         this.useChance = useChance;
