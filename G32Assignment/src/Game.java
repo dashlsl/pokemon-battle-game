@@ -43,6 +43,7 @@ public class Game {
     private static void viewTopScores() {
         System.out.println(topScore);
     }
+    
     private static void viewSavedPokemon() {
         if (savedPokemon.isEmpty()) {
             System.out.println("No Pokemon in your saved list.");

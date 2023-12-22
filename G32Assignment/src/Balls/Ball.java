@@ -65,7 +65,7 @@ public class Ball {
 
     @Override
     public String toString() {
-        return "Ball [name=" + name + ", catchChance=" + catchChance + ", useChance=" + useChance + "]";
+        return "name = " + name + ", catchChance = " + catchChance + ", useChance = " + useChance;
     }
 
     public boolean ballCalculation(int grade, float useChance, float catchChance, float smallMultiplier, float bigMultiplier){

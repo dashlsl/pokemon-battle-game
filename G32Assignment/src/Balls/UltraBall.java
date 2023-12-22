@@ -6,4 +6,9 @@ public class UltraBall extends Ball {
         super(name, catchChance, useChance, calculation, smallMultiplier, bigMultiplier);
     }
 
+    @Override
+    public String toString() {
+        return String.format("Ultra Ball | [%s]",
+          super.toString());
+    }
 }

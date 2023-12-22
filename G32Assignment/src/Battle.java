@@ -194,7 +194,7 @@ public class Battle {
 
         if (isCaught) {
             pokemonList.add(enemyPokemon);  // Add the caught Pokemon to the list
-            System.out.println("Congratulations! You caught the enemy Pokemon with a(n) " + ball.getName());
+            System.out.println("Congratulations! You caught the enemy Pokemon with a(n) " + ball);
             enemyPokemon.setStatus("Caught");
         } else {
             System.out.println("Oh no! The enemy Pokemon broke free. Better luck next time!");
