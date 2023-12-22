@@ -42,11 +42,11 @@ public class Battle {
         Pokemon poke3 = getRandomPoke(pokemonList);
         Pokemon poke4 = getRandomPoke(pokemonList);
 
-        // Initialize original health
-        int poke1OriginalHealth = poke1.getHealth();
-        int poke2OriginalHealth = poke2.getHealth();
-        int poke3OriginalHealth = poke3.getHealth();
-        int poke4OriginalHealth = poke4.getHealth();
+        // Initialize original health for pokemonList
+        int[] originalHealths = new int[pokemonList.size()];
+        for (int i = 0; i < pokemonList.size(); i++) {
+            originalHealths[i] = pokemonList.get(i).getHealth();
+        }
 
         boolean battleLost = false;
 
@@ -65,14 +65,13 @@ public class Battle {
             battleLost = true;         
         }
 
+        // Reset Pokemon original health
+        for (int i = 0; i < savedPokemon.size(); i++) {
+            resetPokemonHealth(savedPokemon.get(i), originalHealths[i]);
+        }
+
         if (!battleLost) {
             System.out.println("\nSecond Battle:");
-            
-            // Reset Pokemon original health
-            resetPokemonHealth(poke1, poke1OriginalHealth);
-            resetPokemonHealth(poke2, poke2OriginalHealth);
-            resetPokemonHealth(poke3, poke3OriginalHealth);
-            resetPokemonHealth(poke4, poke4OriginalHealth);
     
             ArrayList<Pokemon> userTeam = selectTeam(savedPokemon);
             
@@ -97,6 +96,11 @@ public class Battle {
                     battleLost = true;
                     break;
                 }
+            }
+
+            // Reset Pokemon original health
+            for (int i = 0; i < savedPokemon.size(); i++) {
+                resetPokemonHealth(savedPokemon.get(i), originalHealths[i]);
             }
     
             if (!battleLost && opponentIndex >= 2) {
