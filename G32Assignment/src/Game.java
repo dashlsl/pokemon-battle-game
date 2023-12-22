@@ -24,11 +24,12 @@ public class Game {
             switch (option) {
                 case 1:
                     Score score = new Score();
+                    Battle.resetForScore();
                     Battle.startBattle(pokemonList, savedPokemon, topScore);
                     score.calculateScore(Battle.getBattlesWon(), Battle.getPokeCaught());
                     System.out.print("Enter your name: ");
                     score.setName(scanner.next());
-
+                    topScore.addScore(score);
                     break;
                 case 2:
                     viewTopScores();

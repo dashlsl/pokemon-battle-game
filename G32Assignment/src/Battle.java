@@ -16,6 +16,11 @@ public class Battle {
         pokeCaught++;
     }
 
+    public static void resetForScore() {
+        battlesWon = 0;
+        pokeCaught = 0;
+    }
+
     public static int getBattlesWon() {
         return battlesWon;
     }
@@ -23,6 +28,8 @@ public class Battle {
     public static int getPokeCaught() {
         return pokeCaught;
     }
+
+
 
     public static void startBattle(ArrayList<Pokemon> pokemonList, ArrayList<Pokemon> savedPokemon, TopScore topScore) {
         // User chooses first pokemon
