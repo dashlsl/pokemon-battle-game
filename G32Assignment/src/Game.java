@@ -23,7 +23,12 @@ public class Game {
 
             switch (option) {
                 case 1:
+                    Score score = new Score();
                     Battle.startBattle(pokemonList, savedPokemon, topScore);
+                    score.calculateScore(Battle.getBattlesWon(), Battle.getPokeCaught());
+                    System.out.print("Enter your name: ");
+                    score.setName(scanner.next());
+
                     break;
                 case 2:
                     viewTopScores();
@@ -33,6 +38,7 @@ public class Game {
                     break;
                 case 4:
                     System.out.println("Exiting...");
+                    topScore.Store();
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");

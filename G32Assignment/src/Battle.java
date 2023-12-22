@@ -5,6 +5,24 @@ import Balls.*;
 
 public class Battle {
     private static Scanner scanner = new Scanner(System.in);
+    private static int battlesWon = 0;
+    private static int pokeCaught = 0;
+
+    public static void winBattle() {
+        battlesWon++;
+    }
+
+    public static void caughtPoke() {
+        pokeCaught++;
+    }
+
+    public static int getBattlesWon() {
+        return battlesWon;
+    }
+
+    public static int getPokeCaught() {
+        return pokeCaught;
+    }
 
     public static void startBattle(ArrayList<Pokemon> pokemonList, ArrayList<Pokemon> savedPokemon, TopScore topScore) {
         // User chooses first pokemon
@@ -30,6 +48,7 @@ public class Battle {
         poke1.attack(poke2);
         if (poke2.getHealth() <= 0) {
             System.out.println("\nYour " + poke1.getName() + " defeated Enemy " + poke2.getName() + "!");
+            winBattle();
             if (catchPokemonPrompt()) {
                 Ball ball = getRandomBall();
                 catchPokemon(poke2, ball, savedPokemon);
@@ -41,7 +60,7 @@ public class Battle {
 
         if (!battleLost) {
             System.out.println("\nSecond Battle:");
-    
+            
             // Reset Pokemon original health
             resetPokemonHealth(poke1, poke1OriginalHealth);
             resetPokemonHealth(poke2, poke2OriginalHealth);
@@ -60,6 +79,7 @@ public class Battle {
     
                 if (currentOpponent.getHealth() <= 0) {
                     System.out.println("\nYour " + user.getName() + " defeated Enemy " + currentOpponent.getName() + "!");
+                    winBattle();
                     if (catchPokemonPrompt()) {
                         Ball ball = getRandomBall();
                         catchPokemon(currentOpponent, ball, savedPokemon);
@@ -196,6 +216,7 @@ public class Battle {
             pokemonList.add(enemyPokemon);  // Add the caught Pokemon to the list
             System.out.println("Congratulations! You caught the enemy Pokemon with a(n) " + ball);
             enemyPokemon.setStatus("Caught");
+            caughtPoke();
         } else {
             System.out.println("Oh no! The enemy Pokemon broke free. Better luck next time!");
         }
