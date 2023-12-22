@@ -30,6 +30,7 @@ public class Game {
                     break;
                 case 3:
                     viewSavedPokemon();
+                    break;
                 case 4:
                     System.out.println("Exiting...");
                     break;
