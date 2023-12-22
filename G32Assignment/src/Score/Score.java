@@ -4,25 +4,25 @@ public class Score implements Comparable<Score> {
     private String name;
     private int score;
 
-    //Constructor
+    // Constructor
     public Score(){
     }
 
-    public Score(String n, int s){
-        name=n;
-        score=s;
+    public Score(String name, int score){
+        this.name = name;
+        this.score = score;
     }
 
-    //Setter
-    public void setName(String n){
-        name=n;
+    // Setter
+    public void setName(String name){
+        this.name = name;
     }
 
-    public void setScore(int s){
-        score=s;
+    public void setScore(int score){
+        this.score = score;
     }
 
-    //Getter
+    // Getter
     public String getName(){
         return name;
     }
@@ -30,21 +30,21 @@ public class Score implements Comparable<Score> {
     public int getScore(){
         return score;
     }
+
+    // toString
+    public String toString(){
+        return "Name: " + getName() + "\nScore: " + getScore();
+    }
     
-    //method
+    // Method
     public void calculateScore(int roundsWon, int catchBonus){
-        score=roundsWon*4000+catchBonus*1000;
+        score = roundsWon*4000+catchBonus*1000;
     }
 
-    //comparble interface implementaion, for arrays.sort
+    // Comparable interface implementaion, for arrays.sort
     @Override
     public int compareTo(Score otherScore) {
         return Integer.compare(this.score, otherScore.score);
     }
 
-
-    //public get
-    public String toString(){
-        return "Name: "+name+"\nScore: "+score;
-    }
 }

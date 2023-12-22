@@ -190,7 +190,7 @@ public class Battle {
         ball = getRandomBall();
 
         // Use the catch logic based on the random ball
-        boolean isCaught = ball.calculation(enemyPokemon.getGrade(), ball.getCatchChance(), ball.getUseChance(), ball.getSmallCalculation(), ball.getBigCalculation());
+        boolean isCaught = ball.ballCalculation(enemyPokemon.getGrade(), ball.getCatchChance(), ball.getUseChance(), ball.getSmallMultiplier(), ball.getBigMultiplier());
 
         if (isCaught) {
             pokemonList.add(enemyPokemon);  // Add the caught Pokemon to the list

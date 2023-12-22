@@ -5,34 +5,35 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+
 public class TopScore {
     //private Score[] topScore;
-    private ArrayList<Score> topScore=new ArrayList<>();
+    private ArrayList<Score> topScore = new ArrayList<>();
         
     //Constructor
-    public TopScore(){
+    public TopScore() {
     }
 
     //1 score
-        public TopScore(Score s1){
+    public TopScore(Score s1) {
         topScore.add(s1);
     }
 
     //2 scores
-    public TopScore(Score s1, Score s2){
+    public TopScore(Score s1, Score s2) {
         topScore.add(s1);
         topScore.add(s2);
     }
 
     //3 scores
-        public TopScore(Score s1, Score s2,Score s3){
+    public TopScore(Score s1, Score s2,Score s3) {
         topScore.add(s1);
         topScore.add(s2);
         topScore.add(s3);
     }
 
     //4 scores
-        public TopScore(Score s1, Score s2,Score s3,Score s4){
+    public TopScore(Score s1, Score s2,Score s3,Score s4) {
         topScore.add(s1);
         topScore.add(s2);
         topScore.add(s3);
@@ -40,7 +41,7 @@ public class TopScore {
     }
 
     //5 scores
-    public TopScore(Score s1, Score s2,Score s3,Score s4,Score s5){
+    public TopScore(Score s1, Score s2,Score s3,Score s4,Score s5) {
         topScore.add(s1);
         topScore.add(s2);
         topScore.add(s3);
@@ -48,12 +49,24 @@ public class TopScore {
         topScore.add(s5);
     }
 
+    //toString
+    public String toString() {
+        StringBuilder result = new StringBuilder("TopScore \n");
+        for (Score score : topScore){
+            if (score != null){
+                result.append(score).append("\n\n");
+            }
+        }
+        result.append("]");
+        return result.toString();
+    }
+
     //Add Score Method
-    public void addScore(Score s){
+    public void addScore(Score s) {
         topScore.add(s);
         Collections.sort(topScore,Collections.reverseOrder());
-        if(topScore.size()>5){          
-            int index=topScore.size()-1;
+        if (topScore.size() > 5) {          
+            int index = topScore.size() - 1;
             topScore.remove(index);
         }
     }
@@ -83,9 +96,8 @@ public class TopScore {
         }
     }
 
-
     //Write to the File
-    public void Store(){
+    public void Store() {
         String filePath = "path/to/output.csv";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Score score : topScore) {
@@ -93,19 +105,6 @@ public class TopScore {
             }
         } catch (IOException e) {
             e.printStackTrace();
-    }
-}
-
-    //toString
-    public String toString(){
-        StringBuilder result=new StringBuilder("TopScore \n");
-        for (Score score:topScore){
-            if (score !=null){
-                result.append(score).append("\n\n");
-            }
         }
-        result.append("]");
-        return result.toString();
     }
 }
-

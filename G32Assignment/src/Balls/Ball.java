@@ -6,13 +6,11 @@ public class Ball {
     private float useChance;
     private float smallMultiplier;
     private float bigMultiplier;
-    private boolean calculation;
 
     public Ball(){
         this.name = "Pokeball";
         this.catchChance = 0.5f;
         this.useChance = 0.5f;
-        this.calculation = true;
         this.smallMultiplier = 0.0f;
         this.bigMultiplier = 0.0f;
     }
@@ -21,7 +19,6 @@ public class Ball {
         this.name = name;
         this.catchChance = catchChance;
         this.useChance = useChance;
-        this.calculation = calculation;
         this.smallMultiplier = smallMultiplier;
         this.bigMultiplier = bigMultiplier;
     }
@@ -50,7 +47,7 @@ public class Ball {
         this.useChance = 0.0f;
     }
 
-    public float getSmallCalculation(){
+    public float getSmallMultiplier(){
         return smallMultiplier;
     }
 
@@ -58,7 +55,7 @@ public class Ball {
         this.smallMultiplier = 1.0f;
     }
 
-    public float getBigCalculation(){
+    public float getBigMultiplier(){
         return bigMultiplier;
     }
 
@@ -71,7 +68,7 @@ public class Ball {
         return "Ball [name=" + name + ", catchChance=" + catchChance + ", useChance=" + useChance + "]";
     }
 
-    public boolean calculation(int grade, float useChance, float catchChance, float smallMultiplier, float bigMultiplier){
+    public boolean ballCalculation(int grade, float useChance, float catchChance, float smallMultiplier, float bigMultiplier){
         if (grade == 1) {
             catchChance = catchChance * smallMultiplier;
             return true;
@@ -81,7 +78,6 @@ public class Ball {
             return true;
         } 
         else {
-            System.out.println("Pokemon was freed");
             return false;
         }
     }
